@@ -1,0 +1,62 @@
+{
+  "name": "@english-test-free/exercise-system",
+  "version": "1.0.0",
+  "description": "Exercise system components for English Test Free platform",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "yarn clean && yarn build",
+    "publish:npm": "npm publish --access public",
+    "publish:npm-private": "npm publish --access restricted",
+    "publish:github": "npm publish",
+    "publish:interactive": "./publish.sh",
+    "version:patch": "npm version patch",
+    "version:minor": "npm version minor",
+    "version:major": "npm version major"
+  },
+  "keywords": [
+    "exercise",
+    "quiz",
+    "spelling",
+    "education",
+    "react",
+    "nextjs"
+  ],
+  "author": "English Test Free Team",
+  "license": "MIT",
+  "private": false,
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/english-test-free/english-test-free.git",
+    "directory": "packages/exercise-system"
+  },
+  "peerDependencies": {
+    "next": ">=14.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "dependencies": {
+    "@mui/material": "7.3.6",
+    "cheerio": "^1.0.0-rc.12",
+    "crypto-js": "^4.2.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/cheerio": "^0.22.0",
+    "@types/crypto-js": "^4.2.0",
+    "@types/lodash": "^4.14.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.0.0"
+  }
+}
