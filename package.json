@@ -49,7 +49,8 @@
     "@mui/material": "7.3.6",
     "cheerio": "^1.0.0-rc.12",
     "crypto-js": "^4.2.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "next": "15.5.9"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.0",

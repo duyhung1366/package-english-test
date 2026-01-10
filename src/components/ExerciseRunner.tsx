@@ -6,6 +6,7 @@ import { useState } from 'react';
 import GameRenderer from './GameRenderer';
 import ReviewResults from './ReviewResults';
 import _ from 'lodash';
+import ExerciseSidebar from './ExerciseSidebar';
 
 export type ShowType = 'all' | 'one-by-one';
 interface ExerciseRunnerProps {
@@ -13,7 +14,6 @@ interface ExerciseRunnerProps {
   exercise: ITopic;
   cards: ICard[];
   seo: ISeo | null;
-  breadcrumbItems?: ITopic[];
   siblingTopics?: ITopic[];
   showType?: ShowType;
   // Optional config
@@ -33,11 +33,10 @@ export default function ExerciseRunner({
   exercise,
   cards,
   seo,
-  breadcrumbItems,
   siblingTopics,
   showType = 'one-by-one',
   shouldShowReviewResults: shouldShowReviewResultsProp = true,
-  sidebarElement
+  sidebarElement = <ExerciseSidebar siblingTopics={siblingTopics || []} currentTopicId={exercise._id} />
 }: ExerciseRunnerProps) {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [shuffledCards, setShuffledCards] = useState<ICard[]>(cards);
