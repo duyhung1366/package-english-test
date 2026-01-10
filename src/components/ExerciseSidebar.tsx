@@ -71,11 +71,11 @@ export default function ExerciseSidebar({ siblingTopics, currentTopicId }: Exerc
           bg-white border-l border-gray-200 shadow-xl lg:shadow-none
           overflow-y-auto
           transition-transform duration-300 ease-in-out
-          z-40
+          z-1000 lg:z-40
           ${isOpen ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'}
         `}
       >
-        <div className="sticky top-0 bg-white border-b border-gray-200 h-[104px] flex items-center px-4 lg:px-6">
+        <div className="sticky top-0 bg-white border-b border-gray-200 h-[50px] flex items-center px-4 lg:px-6">
           <div className="flex items-center justify-between w-full">
             <h3 className="text-lg font-semibold text-gray-900">
               Other Exercises
@@ -102,11 +102,11 @@ export default function ExerciseSidebar({ siblingTopics, currentTopicId }: Exerc
           </div>
         </div>
 
-        <nav className="p-4 lg:p-6">
+        <nav className="p-4 lg:p-6 pb-32 lg:pb-3">
           <ul className="space-y-2">
             {siblingTopics.map((topic) => {
               const isCurrent = topic._id === currentTopicId;
-              
+
               return (
                 <li key={topic._id}>
                   <Link
@@ -114,10 +114,9 @@ export default function ExerciseSidebar({ siblingTopics, currentTopicId }: Exerc
                     onClick={() => setIsOpen(false)}
                     className={`
                       block p-4 rounded-lg border transition-all
-                      ${
-                        isCurrent
-                          ? 'bg-blue-50 border-blue-500 shadow-sm'
-                          : 'bg-white border-gray-200 hover:border-blue-300 hover:shadow-sm'
+                      ${isCurrent
+                        ? 'bg-blue-50 border-blue-500 shadow-sm'
+                        : 'bg-white border-gray-200 hover:border-blue-300 hover:shadow-sm'
                       }
                     `}
                   >
@@ -148,7 +147,7 @@ export default function ExerciseSidebar({ siblingTopics, currentTopicId }: Exerc
                           {topic.questionNum || 0} questions
                         </p>
                       </div>
-                      
+
                       {isCurrent && (
                         <span className="flex-shrink-0 mt-1">
                           <svg
