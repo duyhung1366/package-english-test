@@ -52,7 +52,7 @@ export default function GameRenderer({
   };
 
   if (card.cardGame === CardGame.QUIZ) {
-    const cardAnswer = answers[card._id!];
+    const cardAnswer = answers?.[card._id!];
 
     return (
       <Quiz
