@@ -11,7 +11,6 @@ interface QuizInteractionProps {
   onNext: () => void;
   submitType: SubmitType;
   showNext?: boolean;
-  hideNext?: boolean; // Hide next button completely
   isReviewMode?: boolean; // Review mode - disable interaction
   children: (props: {
     selectedAnswer: number | undefined;
@@ -32,7 +31,6 @@ export default function QuizInteraction({
   onNext,
   submitType,
   showNext,
-  hideNext,
   isReviewMode = false,
   children
 }: QuizInteractionProps) {
@@ -90,7 +88,7 @@ export default function QuizInteraction({
           )} */}
 
           {/* Next Button */}
-          {!hideNext && ((showNext && showFeedback) || (!!selectedAnswer)) && submitType === SubmitType.CHECK_ON_ANSWER && (
+          {showNext && (showFeedback || !!selectedAnswer) && (
             <button
               onClick={onNext}
               className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"

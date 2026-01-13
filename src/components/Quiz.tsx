@@ -10,7 +10,6 @@ interface QuizProps {
   onNext: () => void;
   submitType: SubmitType;
   showNext?: boolean;
-  hideNext?: boolean; // Hide next button completely (for use in ParaGame)
   isReviewMode?: boolean; // Review mode - show all answers, disable interaction
   questionNumber?: number; // Question number for review mode
 }
@@ -20,7 +19,7 @@ interface QuizProps {
  * Combines server-rendered content (QuizContent) with client-side interactions (QuizInteraction)
  * This ensures SEO-friendly content while maintaining rich interactivity
  */
-export default function Quiz({ card, answer, onAnswer, onNext, submitType, showNext, hideNext, isReviewMode = false, questionNumber }: QuizProps) {
+export default function Quiz({ card, answer, onAnswer, onNext, submitType, showNext, isReviewMode = false, questionNumber }: QuizProps) {
   return (
     <QuizInteraction
       card={card}
@@ -29,7 +28,6 @@ export default function Quiz({ card, answer, onAnswer, onNext, submitType, showN
       onNext={onNext}
       submitType={submitType}
       showNext={showNext}
-      hideNext={hideNext}
       isReviewMode={isReviewMode}
     >
       {({ selectedAnswer, showFeedback, handleChoiceSelect }) => (

@@ -2,7 +2,7 @@
 import { exerciseUtils } from '../lib/utils';
 import { CardGame, ICard, ISeo, ITopic, SubmitType } from '../models';
 // import Link from 'next/link';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import GameRenderer from './GameRenderer';
 import ReviewResults from './ReviewResults';
 import _ from 'lodash';
@@ -46,14 +46,14 @@ export default function ExerciseRunner({
 
   // const totalQuestions = exerciseUtils.getTotalQuestionCount(shuffledCards);
 
-  const handleAnswer = (cardId: string, answer: Answer) => {
+  const handleAnswer = useCallback((cardId: string, answer: Answer) => {
     setAnswers(prev => ({
       ...prev,
       [cardId]: answer
     }));
-  };
+  }, []);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (showType === 'all') return
     if (currentCardIndex < shuffledCards.length - 1) {
       setCurrentCardIndex(prev => prev + 1);
@@ -64,7 +64,7 @@ export default function ExerciseRunner({
     }
     // scroll to top 
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  }, [showType, currentCardIndex, shuffledCards.length]);
 
   const getTotalAnswers = (cards: ICard[]): number => {
     return cards.reduce((total, card) => {
@@ -237,10 +237,11 @@ export default function ExerciseRunner({
                   {/* {renderGame(card)} */}
                   <GameRenderer
                     card={card}
-                    answers={answers}
+                    // answers={answers}
                     onAnswer={handleAnswer}
                     onNext={handleNext}
                     submitType={exercise.submitType || SubmitType.CHECK_ON_ANSWER}
+                    showType={showType}
                   />
                 </div>
               ))}
@@ -312,10 +313,11 @@ export default function ExerciseRunner({
                 >
                   <GameRenderer
                     card={card}
-                    answers={answers}
+                    // answers={answers}
                     onAnswer={handleAnswer}
                     onNext={handleNext}
                     submitType={exercise.submitType || SubmitType.CHECK_ON_ANSWER}
+                    showType={showType}
                   />
                 </div>
               );

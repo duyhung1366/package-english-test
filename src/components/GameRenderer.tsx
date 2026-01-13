@@ -4,17 +4,18 @@ import { ICard, CardGame, SubmitType } from '../models';
 import Quiz from './Quiz';
 import Spelling from './Spelling';
 import ParaGame from './ParaGame';
-import { Answer } from './ExerciseRunner';
+import { Answer, ShowType } from './ExerciseRunner';
 
 interface GameRendererProps {
   card: ICard;
-  answers: Record<string, Answer | undefined>;
+  answers?: Record<string, Answer | undefined>;
   onAnswer: (cardId: string, answer: Answer) => void;
   onNext: () => void;
   submitType: SubmitType;
   isChildOfPara?: boolean;
   isReviewMode?: boolean; // New prop for review mode
   questionNumber?: number; // Question number for review mode
+  showType?: ShowType;
 }
 
 /**
@@ -30,7 +31,8 @@ export default function GameRenderer({
   submitType,
   isChildOfPara = false,
   isReviewMode = false,
-  questionNumber
+  questionNumber,
+  showType = "one-by-one"
 }: GameRendererProps) {
 
   // Recursive render function for nested cards (used in ParaGame)
@@ -59,8 +61,7 @@ export default function GameRenderer({
         onAnswer={(answer) => onAnswer(card._id!, answer)}
         onNext={onNext}
         submitType={submitType}
-        showNext={submitType === SubmitType.CHECK_ON_ANSWER || !!cardAnswer}
-        hideNext={isChildOfPara}
+        showNext={showType === "one-by-one" && !isChildOfPara}
         isReviewMode={isReviewMode}
         questionNumber={questionNumber}
       />
@@ -75,7 +76,7 @@ export default function GameRenderer({
         onAnswer={onAnswer}
         onNext={onNext}
         submitType={submitType}
-        hideNext={isChildOfPara}
+        showNext={!isChildOfPara && showType === "one-by-one"}
         isReviewMode={isReviewMode}
         questionNumber={questionNumber}
       />
