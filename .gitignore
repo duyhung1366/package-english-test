@@ -3,3 +3,5 @@ dist
 node_modules
 .npmrc
 .npmrc.local
+*storybook.log
+storybook-static
