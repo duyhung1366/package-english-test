@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import ExerciseRunner from './ExerciseRunner';
+import ExerciseRunner from '../components/ExerciseRunner';
 import {
   mockTopic,
   mockExercise,
@@ -8,7 +8,7 @@ import {
   mockParaGameCards,
   mockSeo,
   mockSiblingTopics,
-} from '../__mocks__/exerciseData';
+} from './__mocks__/exerciseData';
 
 const meta = {
   title: 'Components/ExerciseRunner',

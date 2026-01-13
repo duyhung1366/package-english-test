@@ -1,6 +1,6 @@
 {
   "name": "@english-test-free/exercise-system",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Exercise system components for English Test Free platform",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,6 +11,7 @@
     "build": "tsc",
     "dev": "tsc --watch",
     "clean": "rm -rf dist",
+    "verify:build": "yarn build && ! find dist -type f \\( -name '*stories*' -o -name '*mocks*' \\) | grep -q . && echo '✅ Build verified - no stories/mocks in dist' || (echo '❌ ERROR: Stories/mocks found in dist!' && exit 1)",
     "prepublishOnly": "yarn clean && yarn build",
     "publish:npm": "npm publish --access public",
     "publish:npm-private": "npm publish --access restricted",
