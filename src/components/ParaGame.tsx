@@ -23,24 +23,24 @@ const ParaGame = ({
 }: ParaGameProps) => {
 
     // Check if all child cards have been answered
-    const hasAllAnswers = () => {
-        if (!card.childCards) return false;
+    // const hasAllAnswers = () => {
+    //     if (!card.childCards) return false;
 
-        return card.childCards.every(childCard => {
-            if (childCard.cardGame === CardGame.QUIZ) {
-                return answers[childCard._id!] !== undefined;
-            } else if (childCard.cardGame === CardGame.SPELLING && childCard.childCards) {
-                return childCard.childCards.every(nestedChild =>
-                    answers[nestedChild._id!] !== undefined
-                );
-            }
-            return false;
-        });
-    };
+    //     return card.childCards.every(childCard => {
+    //         if (childCard.cardGame === CardGame.QUIZ) {
+    //             return answers[childCard._id!] !== undefined;
+    //         } else if (childCard.cardGame === CardGame.SPELLING && childCard.childCards) {
+    //             return childCard.childCards.every(nestedChild =>
+    //                 answers[nestedChild._id!] !== undefined
+    //             );
+    //         }
+    //         return false;
+    //     });
+    // };
 
-    // For PARA game, we show next when all child cards are answered
-    // No need for separate check button since child games handle their own feedback
-    const canShowNext = hasAllAnswers();
+    // // For PARA game, we show next when all child cards are answered
+    // // No need for separate check button since child games handle their own feedback
+    // const canShowNext = hasAllAnswers();
 
     return (
         <div className="bg-white rounded-xl shadow-lg p-8">
@@ -100,7 +100,7 @@ const ParaGame = ({
             </div>
 
             {/* Sticky Action Buttons - Hidden in review mode */}
-            {!isReviewMode && canShowNext && submitType === SubmitType.CHECK_ON_ANSWER && onNext && (
+            {!isReviewMode && submitType === SubmitType.CHECK_ON_ANSWER && onNext && (
                 <div className="sticky bottom-0 bg-white border-t border-gray-200 shadow-lg -mx-8 -mb-8 px-8 py-4">
                     <div className="flex justify-end">
                         <button
