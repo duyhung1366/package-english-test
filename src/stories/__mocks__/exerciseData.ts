@@ -8,7 +8,7 @@ import {
   CardGame,
   CardStatus,
   Status
-} from '../models';
+} from '../../models';
 
 export const mockTopic: ITopic = {
   _id: 'topic-1',
