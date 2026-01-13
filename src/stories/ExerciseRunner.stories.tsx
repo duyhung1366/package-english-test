@@ -8287,6 +8287,363 @@ export const ParaShowOneCheckOnSubmit: Story = {
     },
     "cards": [
       {
+        "_id": "69241d3152d06b540e814db1",
+        "topicId": "6920213452d06b540e814b46",
+        "question": {
+          "audio": null,
+          "audio_data": null,
+          "image": null,
+          "image_data": null,
+          "text": "<p>Choose one word from the Word Bank for each blank. Use each word once.</p>\n<p>&nbsp;</p>\n<p>Word Bank: &nbsp;half &middot; quarter &middot; o&rsquo;clock &middot; Monday &middot; second &middot; past &middot; to &middot; morning &middot; June &middot; week</p>\n<p>&nbsp;</p>\n<p>1. The class starts at nine <input style=\"border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px; background: #f9f9f9;\" type=\"text\" placeholder=\"Answer 1\" data-input-index=\"1\">.</p>\n<p>2. It is <input style=\"border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px; background: #f9f9f9;\" type=\"text\" placeholder=\"Answer 2\" data-input-index=\"2\">&nbsp;past six now.</p>\n<p>3. The meeting is at a <input style=\"border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px; background: #f9f9f9;\" type=\"text\" placeholder=\"Answer 3\" data-input-index=\"3\"> past three.</p>\n<p>4. We have PE on <input style=\"border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px; background: #f9f9f9;\" type=\"text\" placeholder=\"Answer 4\" data-input-index=\"4\">.</p>\n<p>5. I read in the <input style=\"border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px; background: #f9f9f9;\" type=\"text\" placeholder=\"Answer 5\" data-input-index=\"5\"> before school.</p>\n<p>6. There are seven days in a <input style=\"border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px; background: #f9f9f9;\" type=\"text\" placeholder=\"Answer 6\" data-input-index=\"6\">.</p>\n<p>7. Our exam is in <input style=\"border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px; background: #f9f9f9;\" type=\"text\" placeholder=\"Answer 7\" data-input-index=\"7\"> this year.</p>\n<p>8. Today is the <input style=\"border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px; background: #f9f9f9;\" type=\"text\" placeholder=\"Answer 8\" data-input-index=\"8\">&nbsp;of May.</p>\n<p>9. We arrive at ten <input style=\"border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px; background: #f9f9f9;\" type=\"text\" placeholder=\"Answer 9\" data-input-index=\"9\"> &nbsp;five (10:05).</p>\n<p>10. The bus leaves at twenty <input style=\"border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px; background: #f9f9f9;\" type=\"text\" placeholder=\"Answer 10\" data-input-index=\"10\"> seven (6:40).</p>"
+        },
+        "explanation": "",
+        "explanationLang": {},
+        "explanationDefaultLang": "en",
+        "difficulty": 1,
+        "status": 1,
+        "parentId": null,
+        "choices": [],
+        "mapLangChoice": {},
+        "defaultChoiceLang": "en",
+        "cardGame": 2,
+        "childCards": [
+          {
+            "_id": "69241e8652d06b540e814df8",
+            "topicId": "6920213452d06b540e814b46",
+            "question": {
+              "audio": null,
+              "audio_data": null,
+              "image": null,
+              "image_data": null,
+              "text": "<p>10</p>"
+            },
+            "explanation": "",
+            "explanationLang": {},
+            "explanationDefaultLang": "en",
+            "difficulty": 1,
+            "status": 1,
+            "parentId": "69241d3152d06b540e814db1",
+            "choices": [
+              {
+                "id": 1,
+                "textId": "A",
+                "content": "to",
+                "isCorrect": true
+              }
+            ],
+            "mapLangChoice": {},
+            "defaultChoiceLang": "en",
+            "cardGame": 1,
+            "childCards": [],
+            "createdAt": "2025-11-24T08:59:50.652Z",
+            "updatedAt": "2025-11-24T08:59:50.652Z",
+            "isActive": true,
+            "isDeleted": false
+          },
+          {
+            "_id": "69241e7c52d06b540e814df2",
+            "topicId": "6920213452d06b540e814b46",
+            "question": {
+              "audio": null,
+              "audio_data": null,
+              "image": null,
+              "image_data": null,
+              "text": "<p>9</p>"
+            },
+            "explanation": "",
+            "explanationLang": {},
+            "explanationDefaultLang": "en",
+            "difficulty": 1,
+            "status": 1,
+            "parentId": "69241d3152d06b540e814db1",
+            "choices": [
+              {
+                "id": 1,
+                "textId": "A",
+                "content": "past",
+                "isCorrect": true
+              }
+            ],
+            "mapLangChoice": {},
+            "defaultChoiceLang": "en",
+            "cardGame": 1,
+            "childCards": [],
+            "createdAt": "2025-11-24T08:59:40.956Z",
+            "updatedAt": "2025-11-24T08:59:40.956Z",
+            "isActive": true,
+            "isDeleted": false
+          },
+          {
+            "_id": "69241e7452d06b540e814dec",
+            "topicId": "6920213452d06b540e814b46",
+            "question": {
+              "audio": null,
+              "audio_data": null,
+              "image": null,
+              "image_data": null,
+              "text": "<p>8</p>"
+            },
+            "explanation": "",
+            "explanationLang": {},
+            "explanationDefaultLang": "en",
+            "difficulty": 1,
+            "status": 1,
+            "parentId": "69241d3152d06b540e814db1",
+            "choices": [
+              {
+                "id": 1,
+                "textId": "A",
+                "content": "second",
+                "isCorrect": true
+              }
+            ],
+            "mapLangChoice": {},
+            "defaultChoiceLang": "en",
+            "cardGame": 1,
+            "childCards": [],
+            "createdAt": "2025-11-24T08:59:32.898Z",
+            "updatedAt": "2025-11-24T08:59:32.898Z",
+            "isActive": true,
+            "isDeleted": false
+          },
+          {
+            "_id": "69241e6e52d06b540e814de6",
+            "topicId": "6920213452d06b540e814b46",
+            "question": {
+              "audio": null,
+              "audio_data": null,
+              "image": null,
+              "image_data": null,
+              "text": "<p>7</p>"
+            },
+            "explanation": "",
+            "explanationLang": {},
+            "explanationDefaultLang": "en",
+            "difficulty": 1,
+            "status": 1,
+            "parentId": "69241d3152d06b540e814db1",
+            "choices": [
+              {
+                "id": 1,
+                "textId": "A",
+                "content": "June",
+                "isCorrect": true
+              }
+            ],
+            "mapLangChoice": {},
+            "defaultChoiceLang": "en",
+            "cardGame": 1,
+            "childCards": [],
+            "createdAt": "2025-11-24T08:59:26.159Z",
+            "updatedAt": "2025-11-24T08:59:26.159Z",
+            "isActive": true,
+            "isDeleted": false
+          },
+          {
+            "_id": "69241e6552d06b540e814de0",
+            "topicId": "6920213452d06b540e814b46",
+            "question": {
+              "audio": null,
+              "audio_data": null,
+              "image": null,
+              "image_data": null,
+              "text": "<p>6</p>"
+            },
+            "explanation": "",
+            "explanationLang": {},
+            "explanationDefaultLang": "en",
+            "difficulty": 1,
+            "status": 1,
+            "parentId": "69241d3152d06b540e814db1",
+            "choices": [
+              {
+                "id": 1,
+                "textId": "A",
+                "content": "week",
+                "isCorrect": true
+              }
+            ],
+            "mapLangChoice": {},
+            "defaultChoiceLang": "en",
+            "cardGame": 1,
+            "childCards": [],
+            "createdAt": "2025-11-24T08:59:17.720Z",
+            "updatedAt": "2025-11-24T08:59:17.720Z",
+            "isActive": true,
+            "isDeleted": false
+          },
+          {
+            "_id": "69241e5b52d06b540e814dda",
+            "topicId": "6920213452d06b540e814b46",
+            "question": {
+              "audio": null,
+              "audio_data": null,
+              "image": null,
+              "image_data": null,
+              "text": "<p>5</p>"
+            },
+            "explanation": "",
+            "explanationLang": {},
+            "explanationDefaultLang": "en",
+            "difficulty": 1,
+            "status": 1,
+            "parentId": "69241d3152d06b540e814db1",
+            "choices": [
+              {
+                "id": 1,
+                "textId": "A",
+                "content": "morning",
+                "isCorrect": true
+              }
+            ],
+            "mapLangChoice": {},
+            "defaultChoiceLang": "en",
+            "cardGame": 1,
+            "childCards": [],
+            "createdAt": "2025-11-24T08:59:07.547Z",
+            "updatedAt": "2025-11-24T08:59:07.547Z",
+            "isActive": true,
+            "isDeleted": false
+          },
+          {
+            "_id": "69241e5352d06b540e814dd4",
+            "topicId": "6920213452d06b540e814b46",
+            "question": {
+              "audio": null,
+              "audio_data": null,
+              "image": null,
+              "image_data": null,
+              "text": "<p>4</p>"
+            },
+            "explanation": "",
+            "explanationLang": {},
+            "explanationDefaultLang": "en",
+            "difficulty": 1,
+            "status": 1,
+            "parentId": "69241d3152d06b540e814db1",
+            "choices": [
+              {
+                "id": 1,
+                "textId": "A",
+                "content": "Monday",
+                "isCorrect": true
+              }
+            ],
+            "mapLangChoice": {},
+            "defaultChoiceLang": "en",
+            "cardGame": 1,
+            "childCards": [],
+            "createdAt": "2025-11-24T08:58:59.213Z",
+            "updatedAt": "2025-11-24T09:00:05.446Z",
+            "isActive": true,
+            "isDeleted": false
+          },
+          {
+            "_id": "69241e4a52d06b540e814dce",
+            "topicId": "6920213452d06b540e814b46",
+            "question": {
+              "audio": null,
+              "audio_data": null,
+              "image": null,
+              "image_data": null,
+              "text": "<p>3</p>"
+            },
+            "explanation": "",
+            "explanationLang": {},
+            "explanationDefaultLang": "en",
+            "difficulty": 1,
+            "status": 1,
+            "parentId": "69241d3152d06b540e814db1",
+            "choices": [
+              {
+                "id": 1,
+                "textId": "A",
+                "content": "quarter",
+                "isCorrect": true
+              }
+            ],
+            "mapLangChoice": {},
+            "defaultChoiceLang": "en",
+            "cardGame": 1,
+            "childCards": [],
+            "createdAt": "2025-11-24T08:58:50.372Z",
+            "updatedAt": "2025-11-24T08:58:50.372Z",
+            "isActive": true,
+            "isDeleted": false
+          },
+          {
+            "_id": "69241e4352d06b540e814dc8",
+            "topicId": "6920213452d06b540e814b46",
+            "question": {
+              "audio": null,
+              "audio_data": null,
+              "image": null,
+              "image_data": null,
+              "text": "<p>2</p>"
+            },
+            "explanation": "",
+            "explanationLang": {},
+            "explanationDefaultLang": "en",
+            "difficulty": 1,
+            "status": 1,
+            "parentId": "69241d3152d06b540e814db1",
+            "choices": [
+              {
+                "id": 1,
+                "textId": "A",
+                "content": "half",
+                "isCorrect": true
+              }
+            ],
+            "mapLangChoice": {},
+            "defaultChoiceLang": "en",
+            "cardGame": 1,
+            "childCards": [],
+            "createdAt": "2025-11-24T08:58:43.208Z",
+            "updatedAt": "2025-11-24T08:58:43.208Z",
+            "isActive": true,
+            "isDeleted": false
+          },
+          {
+            "_id": "69241e3952d06b540e814dc2",
+            "topicId": "6920213452d06b540e814b46",
+            "question": {
+              "audio": null,
+              "audio_data": null,
+              "image": null,
+              "image_data": null,
+              "text": "<p>1</p>"
+            },
+            "explanation": "",
+            "explanationLang": {},
+            "explanationDefaultLang": "en",
+            "difficulty": 1,
+            "status": 1,
+            "parentId": "69241d3152d06b540e814db1",
+            "choices": [
+              {
+                "id": 1,
+                "textId": "A",
+                "content": "o’clock",
+                "isCorrect": true
+              }
+            ],
+            "mapLangChoice": {},
+            "defaultChoiceLang": "en",
+            "cardGame": 1,
+            "childCards": [],
+            "createdAt": "2025-11-24T08:58:33.295Z",
+            "updatedAt": "2025-11-24T08:58:33.295Z",
+            "isActive": true,
+            "isDeleted": false
+          }
+        ],
+        "createdAt": "2025-11-24T08:54:09.111Z",
+        "updatedAt": "2025-11-24T08:54:09.111Z",
+        "isActive": true,
+        "isDeleted": false
+      },
+      {
         "_id": "6924188152d06b540e814d52",
         "topicId": "6920213452d06b540e814b46",
         "question": {
@@ -8820,363 +9177,6 @@ export const ParaShowOneCheckOnSubmit: Story = {
         ],
         "createdAt": "2025-11-24T08:34:09.488Z",
         "updatedAt": "2025-11-24T08:34:09.488Z",
-        "isActive": true,
-        "isDeleted": false
-      },
-      {
-        "_id": "69241d3152d06b540e814db1",
-        "topicId": "6920213452d06b540e814b46",
-        "question": {
-          "audio": null,
-          "audio_data": null,
-          "image": null,
-          "image_data": null,
-          "text": "<p>Choose one word from the Word Bank for each blank. Use each word once.</p>\n<p>&nbsp;</p>\n<p>Word Bank: &nbsp;half &middot; quarter &middot; o&rsquo;clock &middot; Monday &middot; second &middot; past &middot; to &middot; morning &middot; June &middot; week</p>\n<p>&nbsp;</p>\n<p>1. The class starts at nine <input style=\"border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px; background: #f9f9f9;\" type=\"text\" placeholder=\"Answer 1\" data-input-index=\"1\">.</p>\n<p>2. It is <input style=\"border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px; background: #f9f9f9;\" type=\"text\" placeholder=\"Answer 2\" data-input-index=\"2\">&nbsp;past six now.</p>\n<p>3. The meeting is at a <input style=\"border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px; background: #f9f9f9;\" type=\"text\" placeholder=\"Answer 3\" data-input-index=\"3\"> past three.</p>\n<p>4. We have PE on <input style=\"border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px; background: #f9f9f9;\" type=\"text\" placeholder=\"Answer 4\" data-input-index=\"4\">.</p>\n<p>5. I read in the <input style=\"border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px; background: #f9f9f9;\" type=\"text\" placeholder=\"Answer 5\" data-input-index=\"5\"> before school.</p>\n<p>6. There are seven days in a <input style=\"border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px; background: #f9f9f9;\" type=\"text\" placeholder=\"Answer 6\" data-input-index=\"6\">.</p>\n<p>7. Our exam is in <input style=\"border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px; background: #f9f9f9;\" type=\"text\" placeholder=\"Answer 7\" data-input-index=\"7\"> this year.</p>\n<p>8. Today is the <input style=\"border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px; background: #f9f9f9;\" type=\"text\" placeholder=\"Answer 8\" data-input-index=\"8\">&nbsp;of May.</p>\n<p>9. We arrive at ten <input style=\"border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px; background: #f9f9f9;\" type=\"text\" placeholder=\"Answer 9\" data-input-index=\"9\"> &nbsp;five (10:05).</p>\n<p>10. The bus leaves at twenty <input style=\"border: 1px solid #ccc; padding: 4px 8px; border-radius: 4px; background: #f9f9f9;\" type=\"text\" placeholder=\"Answer 10\" data-input-index=\"10\"> seven (6:40).</p>"
-        },
-        "explanation": "",
-        "explanationLang": {},
-        "explanationDefaultLang": "en",
-        "difficulty": 1,
-        "status": 1,
-        "parentId": null,
-        "choices": [],
-        "mapLangChoice": {},
-        "defaultChoiceLang": "en",
-        "cardGame": 2,
-        "childCards": [
-          {
-            "_id": "69241e8652d06b540e814df8",
-            "topicId": "6920213452d06b540e814b46",
-            "question": {
-              "audio": null,
-              "audio_data": null,
-              "image": null,
-              "image_data": null,
-              "text": "<p>10</p>"
-            },
-            "explanation": "",
-            "explanationLang": {},
-            "explanationDefaultLang": "en",
-            "difficulty": 1,
-            "status": 1,
-            "parentId": "69241d3152d06b540e814db1",
-            "choices": [
-              {
-                "id": 1,
-                "textId": "A",
-                "content": "to",
-                "isCorrect": true
-              }
-            ],
-            "mapLangChoice": {},
-            "defaultChoiceLang": "en",
-            "cardGame": 1,
-            "childCards": [],
-            "createdAt": "2025-11-24T08:59:50.652Z",
-            "updatedAt": "2025-11-24T08:59:50.652Z",
-            "isActive": true,
-            "isDeleted": false
-          },
-          {
-            "_id": "69241e7c52d06b540e814df2",
-            "topicId": "6920213452d06b540e814b46",
-            "question": {
-              "audio": null,
-              "audio_data": null,
-              "image": null,
-              "image_data": null,
-              "text": "<p>9</p>"
-            },
-            "explanation": "",
-            "explanationLang": {},
-            "explanationDefaultLang": "en",
-            "difficulty": 1,
-            "status": 1,
-            "parentId": "69241d3152d06b540e814db1",
-            "choices": [
-              {
-                "id": 1,
-                "textId": "A",
-                "content": "past",
-                "isCorrect": true
-              }
-            ],
-            "mapLangChoice": {},
-            "defaultChoiceLang": "en",
-            "cardGame": 1,
-            "childCards": [],
-            "createdAt": "2025-11-24T08:59:40.956Z",
-            "updatedAt": "2025-11-24T08:59:40.956Z",
-            "isActive": true,
-            "isDeleted": false
-          },
-          {
-            "_id": "69241e7452d06b540e814dec",
-            "topicId": "6920213452d06b540e814b46",
-            "question": {
-              "audio": null,
-              "audio_data": null,
-              "image": null,
-              "image_data": null,
-              "text": "<p>8</p>"
-            },
-            "explanation": "",
-            "explanationLang": {},
-            "explanationDefaultLang": "en",
-            "difficulty": 1,
-            "status": 1,
-            "parentId": "69241d3152d06b540e814db1",
-            "choices": [
-              {
-                "id": 1,
-                "textId": "A",
-                "content": "second",
-                "isCorrect": true
-              }
-            ],
-            "mapLangChoice": {},
-            "defaultChoiceLang": "en",
-            "cardGame": 1,
-            "childCards": [],
-            "createdAt": "2025-11-24T08:59:32.898Z",
-            "updatedAt": "2025-11-24T08:59:32.898Z",
-            "isActive": true,
-            "isDeleted": false
-          },
-          {
-            "_id": "69241e6e52d06b540e814de6",
-            "topicId": "6920213452d06b540e814b46",
-            "question": {
-              "audio": null,
-              "audio_data": null,
-              "image": null,
-              "image_data": null,
-              "text": "<p>7</p>"
-            },
-            "explanation": "",
-            "explanationLang": {},
-            "explanationDefaultLang": "en",
-            "difficulty": 1,
-            "status": 1,
-            "parentId": "69241d3152d06b540e814db1",
-            "choices": [
-              {
-                "id": 1,
-                "textId": "A",
-                "content": "June",
-                "isCorrect": true
-              }
-            ],
-            "mapLangChoice": {},
-            "defaultChoiceLang": "en",
-            "cardGame": 1,
-            "childCards": [],
-            "createdAt": "2025-11-24T08:59:26.159Z",
-            "updatedAt": "2025-11-24T08:59:26.159Z",
-            "isActive": true,
-            "isDeleted": false
-          },
-          {
-            "_id": "69241e6552d06b540e814de0",
-            "topicId": "6920213452d06b540e814b46",
-            "question": {
-              "audio": null,
-              "audio_data": null,
-              "image": null,
-              "image_data": null,
-              "text": "<p>6</p>"
-            },
-            "explanation": "",
-            "explanationLang": {},
-            "explanationDefaultLang": "en",
-            "difficulty": 1,
-            "status": 1,
-            "parentId": "69241d3152d06b540e814db1",
-            "choices": [
-              {
-                "id": 1,
-                "textId": "A",
-                "content": "week",
-                "isCorrect": true
-              }
-            ],
-            "mapLangChoice": {},
-            "defaultChoiceLang": "en",
-            "cardGame": 1,
-            "childCards": [],
-            "createdAt": "2025-11-24T08:59:17.720Z",
-            "updatedAt": "2025-11-24T08:59:17.720Z",
-            "isActive": true,
-            "isDeleted": false
-          },
-          {
-            "_id": "69241e5b52d06b540e814dda",
-            "topicId": "6920213452d06b540e814b46",
-            "question": {
-              "audio": null,
-              "audio_data": null,
-              "image": null,
-              "image_data": null,
-              "text": "<p>5</p>"
-            },
-            "explanation": "",
-            "explanationLang": {},
-            "explanationDefaultLang": "en",
-            "difficulty": 1,
-            "status": 1,
-            "parentId": "69241d3152d06b540e814db1",
-            "choices": [
-              {
-                "id": 1,
-                "textId": "A",
-                "content": "morning",
-                "isCorrect": true
-              }
-            ],
-            "mapLangChoice": {},
-            "defaultChoiceLang": "en",
-            "cardGame": 1,
-            "childCards": [],
-            "createdAt": "2025-11-24T08:59:07.547Z",
-            "updatedAt": "2025-11-24T08:59:07.547Z",
-            "isActive": true,
-            "isDeleted": false
-          },
-          {
-            "_id": "69241e5352d06b540e814dd4",
-            "topicId": "6920213452d06b540e814b46",
-            "question": {
-              "audio": null,
-              "audio_data": null,
-              "image": null,
-              "image_data": null,
-              "text": "<p>4</p>"
-            },
-            "explanation": "",
-            "explanationLang": {},
-            "explanationDefaultLang": "en",
-            "difficulty": 1,
-            "status": 1,
-            "parentId": "69241d3152d06b540e814db1",
-            "choices": [
-              {
-                "id": 1,
-                "textId": "A",
-                "content": "Monday",
-                "isCorrect": true
-              }
-            ],
-            "mapLangChoice": {},
-            "defaultChoiceLang": "en",
-            "cardGame": 1,
-            "childCards": [],
-            "createdAt": "2025-11-24T08:58:59.213Z",
-            "updatedAt": "2025-11-24T09:00:05.446Z",
-            "isActive": true,
-            "isDeleted": false
-          },
-          {
-            "_id": "69241e4a52d06b540e814dce",
-            "topicId": "6920213452d06b540e814b46",
-            "question": {
-              "audio": null,
-              "audio_data": null,
-              "image": null,
-              "image_data": null,
-              "text": "<p>3</p>"
-            },
-            "explanation": "",
-            "explanationLang": {},
-            "explanationDefaultLang": "en",
-            "difficulty": 1,
-            "status": 1,
-            "parentId": "69241d3152d06b540e814db1",
-            "choices": [
-              {
-                "id": 1,
-                "textId": "A",
-                "content": "quarter",
-                "isCorrect": true
-              }
-            ],
-            "mapLangChoice": {},
-            "defaultChoiceLang": "en",
-            "cardGame": 1,
-            "childCards": [],
-            "createdAt": "2025-11-24T08:58:50.372Z",
-            "updatedAt": "2025-11-24T08:58:50.372Z",
-            "isActive": true,
-            "isDeleted": false
-          },
-          {
-            "_id": "69241e4352d06b540e814dc8",
-            "topicId": "6920213452d06b540e814b46",
-            "question": {
-              "audio": null,
-              "audio_data": null,
-              "image": null,
-              "image_data": null,
-              "text": "<p>2</p>"
-            },
-            "explanation": "",
-            "explanationLang": {},
-            "explanationDefaultLang": "en",
-            "difficulty": 1,
-            "status": 1,
-            "parentId": "69241d3152d06b540e814db1",
-            "choices": [
-              {
-                "id": 1,
-                "textId": "A",
-                "content": "half",
-                "isCorrect": true
-              }
-            ],
-            "mapLangChoice": {},
-            "defaultChoiceLang": "en",
-            "cardGame": 1,
-            "childCards": [],
-            "createdAt": "2025-11-24T08:58:43.208Z",
-            "updatedAt": "2025-11-24T08:58:43.208Z",
-            "isActive": true,
-            "isDeleted": false
-          },
-          {
-            "_id": "69241e3952d06b540e814dc2",
-            "topicId": "6920213452d06b540e814b46",
-            "question": {
-              "audio": null,
-              "audio_data": null,
-              "image": null,
-              "image_data": null,
-              "text": "<p>1</p>"
-            },
-            "explanation": "",
-            "explanationLang": {},
-            "explanationDefaultLang": "en",
-            "difficulty": 1,
-            "status": 1,
-            "parentId": "69241d3152d06b540e814db1",
-            "choices": [
-              {
-                "id": 1,
-                "textId": "A",
-                "content": "o’clock",
-                "isCorrect": true
-              }
-            ],
-            "mapLangChoice": {},
-            "defaultChoiceLang": "en",
-            "cardGame": 1,
-            "childCards": [],
-            "createdAt": "2025-11-24T08:58:33.295Z",
-            "updatedAt": "2025-11-24T08:58:33.295Z",
-            "isActive": true,
-            "isDeleted": false
-          }
-        ],
-        "createdAt": "2025-11-24T08:54:09.111Z",
-        "updatedAt": "2025-11-24T08:54:09.111Z",
         "isActive": true,
         "isDeleted": false
       }

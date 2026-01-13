@@ -1,6 +1,6 @@
 {
   "name": "@english-test-free/exercise-system",
-  "version": "1.1.1",
+  "version": "1.1.6",
   "description": "Exercise system components for English Test Free platform",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

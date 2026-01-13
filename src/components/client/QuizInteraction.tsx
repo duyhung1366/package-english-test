@@ -44,7 +44,6 @@ export default function QuizInteraction({
 
   const handleChoiceSelect = useCallback((choiceId: number) => {
     if (isReviewMode) return; // Disable interaction in review mode
-
     setSelectedAnswer(choiceId);
     onAnswer({
       choiceId,

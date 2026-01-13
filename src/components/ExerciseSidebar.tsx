@@ -1,6 +1,6 @@
 'use client';
 import { ITopic } from '../models';
-// import Link from 'next/link';
+import Link from 'next/link';
 import { useState } from 'react';
 
 interface ExerciseSidebarProps {
@@ -109,7 +109,7 @@ export default function ExerciseSidebar({ siblingTopics, currentTopicId }: Exerc
 
               return (
                 <li key={topic._id}>
-                  <a
+                  <Link
                     href={`/${topic.slug}`}
                     onClick={() => setIsOpen(false)}
                     className={`
@@ -164,7 +164,7 @@ export default function ExerciseSidebar({ siblingTopics, currentTopicId }: Exerc
                         </span>
                       )}
                     </div>
-                  </a>
+                  </Link>
                 </li>
               );
             })}

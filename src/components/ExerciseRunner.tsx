@@ -53,7 +53,7 @@ export default function ExerciseRunner({
     }));
   }, []);
 
-  const handleNext = useCallback(() => {
+  const handleNext = () => {
     if (showType === 'all') return
     if (currentCardIndex < shuffledCards.length - 1) {
       setCurrentCardIndex(prev => prev + 1);
@@ -64,7 +64,7 @@ export default function ExerciseRunner({
     }
     // scroll to top 
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [showType, currentCardIndex, shuffledCards.length]);
+  };
 
   const getTotalAnswers = (cards: ICard[]): number => {
     return cards.reduce((total, card) => {
@@ -88,7 +88,7 @@ export default function ExerciseRunner({
     }, 0);
     let totalAnswers = getTotalAnswers(shuffledCards);
 
-    setScore(Math.round((correctAnswers / totalAnswers) * 100));
+    setScore(Math.round((correctAnswers / (totalAnswers || 1)) * 100));
   };
 
   const handleShowResults = () => {
