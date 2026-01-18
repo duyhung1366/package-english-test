@@ -90,12 +90,12 @@ const QuestionContainer = memo(({
 
     const container = questionContainerRef.current;
 
-    // Use querySelectorAll to get all input elements in the container
-    const inputElements = container.querySelectorAll('input[type="text"]');
+    // Use querySelectorAll to get all input has data-input-index elements in the container
+    const inputElements = container.querySelectorAll('input[data-input-index]');
 
     // If no inputs found, it means they're already replaced, skip
     if (inputElements.length === 0) return;
-
+    
     // Iterate through each input element
     inputElements.forEach((inputEl, index) => {
       const inputIndex = index + 1;
