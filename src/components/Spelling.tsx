@@ -95,14 +95,14 @@ const QuestionContainer = memo(({
 
     // If no inputs found, it means they're already replaced, skip
     if (inputElements.length === 0) return;
-    
+
     // Iterate through each input element
     inputElements.forEach((inputEl, index) => {
       const inputIndex = index + 1;
 
       // Create wrapper span
       const wrapper = document.createElement('span');
-      wrapper.className = 'inline-flex items-center mx-1 relative';
+      wrapper.className = 'inline-flex items-center mx-1 relative flex-wrap gap-y-1';
       wrapper.setAttribute('data-input-index', inputIndex.toString());
 
       // Create numbered badge
@@ -134,7 +134,7 @@ const QuestionContainer = memo(({
       inputEl.parentNode?.replaceChild(wrapper, inputEl);
     });
 
-    if (showFeedback) { 
+    if (showFeedback) {
       console.log("re render useEffect - update feedback");
       const spanElements = container.querySelectorAll('span[data-input-index]');
       spanElements.forEach((wrapper) => {
@@ -142,7 +142,7 @@ const QuestionContainer = memo(({
         const inputValue = inputValuesRef.current[inputIndex]?.value || '';
         const isCorrect = inputValuesRef.current[inputIndex]?.isCorrect || false;
         const correctAnswer = getCorrectAnswer(inputIndex);
-  
+
         // Replace input with feedback
         const existingInput = wrapper.querySelector('.spelling-input');
         if (existingInput) {
@@ -153,10 +153,10 @@ const QuestionContainer = memo(({
             : 'border-red-500 bg-red-50 text-red-700 line-through'
             }`;
           feedbackSpan.textContent = inputValue;
-  
+
           // Replace input with feedback
           existingInput.replaceWith(feedbackSpan);
-  
+
           // Add correct answer if wrong
           if (!isCorrect) {
             const correctSpan = document.createElement('span');
@@ -171,7 +171,7 @@ const QuestionContainer = memo(({
 
   // Update feedback when showFeedback changes
   useEffect(() => {
-    
+
   }, [showFeedback]);
 
   return (
@@ -372,13 +372,11 @@ export default function Spelling({ card, answers, onAnswer, onNext, submitType, 
               </svg>
             </div>
             <div className="ml-3">
-              <h3 className="text-sm font-medium text-blue-800">
+              <h3 className="font-medium text-blue-800">
                 Check your answers above
               </h3>
               {card.explanation && (
-                <p className="mt-1 text-sm text-blue-700">
-                  {card.explanation}
-                </p>
+                <p className="mt-1 text-blue-700" dangerouslySetInnerHTML={{ __html: card.explanation }} />
               )}
             </div>
           </div>
