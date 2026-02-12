@@ -157,9 +157,7 @@ export default function QuizContent({
                 {isCorrect ? 'Correct!' : 'Incorrect'}
               </h3>
               {card.explanation && (
-                <p className={`mt-1 text-sm ${isCorrect ? 'text-green-700' : 'text-red-700'}`}>
-                  {card.explanation}
-                </p>
+                <p className={`mt-1 text-sm ${isCorrect ? 'text-green-700' : 'text-red-700'}`} dangerouslySetInnerHTML={{ __html: card.explanation }} />
               )}
             </div>
           </div>

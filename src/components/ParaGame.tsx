@@ -99,6 +99,13 @@ const ParaGame = ({
                 ))}
             </div>
 
+            {/* Transcription when has audio in question */}
+            {isReviewMode && (card.question.audio && card.explanation) && (
+                <div className="mb-8">
+                    <p className="text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: card.explanation }} />
+                </div>
+            )}
+
             {/* Sticky Action Buttons - Hidden in review mode */}
             {!isReviewMode && submitType === SubmitType.CHECK_ON_ANSWER && onNext && (
                 <div className="sticky bottom-0 bg-white border-t border-gray-200 shadow-lg -mx-8 -mb-8 px-8 py-4">
