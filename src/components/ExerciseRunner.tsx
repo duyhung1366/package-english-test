@@ -242,6 +242,7 @@ export default function ExerciseRunner({
                     onNext={handleNext}
                     submitType={exercise.submitType || SubmitType.CHECK_ON_ANSWER}
                     showType={showType}
+                    isLastCard={currentCardIndex >= shuffledCards.length - 1}
                   />
                 </div>
               ))}
@@ -318,6 +319,7 @@ export default function ExerciseRunner({
                     onNext={handleNext}
                     submitType={exercise.submitType || SubmitType.CHECK_ON_ANSWER}
                     showType={showType}
+                    isLastCard={currentCardIndex >= shuffledCards.length - 1}
                   />
                 </div>
               );

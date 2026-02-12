@@ -16,6 +16,7 @@ interface GameRendererProps {
   isReviewMode?: boolean; // New prop for review mode
   questionNumber?: number; // Question number for review mode
   showType?: ShowType;
+  isLastCard?: boolean;
 }
 
 /**
@@ -32,7 +33,8 @@ export default function GameRenderer({
   isChildOfPara = false,
   isReviewMode = false,
   questionNumber,
-  showType = "one-by-one"
+  showType = "one-by-one",
+  isLastCard = false
 }: GameRendererProps) {
 
   // Recursive render function for nested cards (used in ParaGame)
@@ -47,6 +49,8 @@ export default function GameRenderer({
         isChildOfPara={true}
         isReviewMode={isReviewMode}
         questionNumber={subQuestionNumber}
+        showType={showType}
+        isLastCard={isLastCard}
       />
     );
   };
@@ -99,6 +103,8 @@ export default function GameRenderer({
         isReviewMode={isReviewMode}
         questionNumber={questionNumber}
         submitType={submitType}
+        showType={showType}
+        isLastCard={isLastCard}
       />
     );
   }

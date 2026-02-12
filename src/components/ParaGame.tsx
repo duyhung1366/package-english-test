@@ -1,6 +1,7 @@
 'use client';
 
 import { ICard, CardGame, SubmitType } from "../models";
+import { ShowType } from "./ExerciseRunner";
 
 interface ParaGameProps {
     card: ICard;
@@ -9,7 +10,9 @@ interface ParaGameProps {
     onNext?: () => void;
     isReviewMode?: boolean;
     questionNumber?: number;
+    showType: ShowType;
     submitType: SubmitType;
+    isLastCard?: boolean;
 }
 
 const ParaGame = ({
@@ -19,7 +22,9 @@ const ParaGame = ({
     onNext,
     isReviewMode = false,
     questionNumber,
-    submitType
+    showType,
+    submitType,
+    isLastCard = false
 }: ParaGameProps) => {
 
     // Check if all child cards have been answered
@@ -107,14 +112,14 @@ const ParaGame = ({
             )}
 
             {/* Sticky Action Buttons - Hidden in review mode */}
-            {!isReviewMode && submitType === SubmitType.CHECK_ON_ANSWER && onNext && (
+            {(!isReviewMode && submitType === SubmitType.CHECK_ON_ANSWER) || (showType === "one-by-one" && submitType === SubmitType.CHECK_ON_SUBMIT && !isReviewMode) && onNext && (
                 <div className="sticky bottom-0 bg-white border-t border-gray-200 shadow-lg -mx-8 -mb-8 px-8 py-4">
                     <div className="flex justify-end">
                         <button
                             onClick={onNext}
                             className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors shadow-md"
                         >
-                            Next Question
+                            {isLastCard ? "Show Results" : "Next Question"}
                         </button>
                     </div>
                 </div>
