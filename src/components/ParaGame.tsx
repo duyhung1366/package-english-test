@@ -47,6 +47,11 @@ const ParaGame = ({
     // // No need for separate check button since child games handle their own feedback
     // const canShowNext = hasAllAnswers();
 
+    const shouldShowNext = !isReviewMode && !!onNext && (
+        submitType === SubmitType.CHECK_ON_ANSWER ||
+        (showType === "one-by-one" && submitType === SubmitType.CHECK_ON_SUBMIT)
+    );
+
     return (
         <div className="bg-white rounded-xl shadow-lg p-8">
             {/* Question Number (for review mode) */}
@@ -112,7 +117,7 @@ const ParaGame = ({
             )}
 
             {/* Sticky Action Buttons - Hidden in review mode */}
-            {(!isReviewMode && submitType === SubmitType.CHECK_ON_ANSWER) || (showType === "one-by-one" && submitType === SubmitType.CHECK_ON_SUBMIT && !isReviewMode) && onNext && (
+            {shouldShowNext && (
                 <div className="sticky bottom-0 bg-white border-t border-gray-200 shadow-lg -mx-8 -mb-8 px-8 py-4">
                     <div className="flex justify-end">
                         <button
