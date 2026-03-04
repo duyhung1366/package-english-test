@@ -3,6 +3,7 @@
 import { ICard, SubmitType } from '../models';
 import CircularScore from './CircularScore';
 import { Answer } from './ExerciseRunner';
+import { useExerciseRunner } from './ExerciseRunnerContext';
 import GameRenderer from './GameRenderer';
 
 interface ReviewResultsProps {
@@ -24,6 +25,7 @@ export default function ReviewResults({
   topicName,
   exerciseName
 }: ReviewResultsProps) {
+  const { renderAds } = useExerciseRunner();
 
   // Dummy handlers for review mode (no interaction needed)
   const handleAnswer = () => {};
@@ -47,6 +49,8 @@ export default function ReviewResults({
           </div>
         </div>
       </div>
+
+      {renderAds({ height: 90, style: { marginTop: '12px', marginBottom: "12px" } })}
 
       {/* Review Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -86,6 +90,7 @@ export default function ReviewResults({
             </button>
           </div>
         </div>
+        {renderAds({ height: 90, style: { marginTop: '12px' } })}
       </div>
     </div>
   );

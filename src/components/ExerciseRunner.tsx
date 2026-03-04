@@ -146,6 +146,7 @@ export default function ExerciseRunner({
             >
               Back to {topicName}
             </a>
+            {renderAds({ height: 90, style: { marginTop: '12px' } })}
           </div>
         </div>
       );

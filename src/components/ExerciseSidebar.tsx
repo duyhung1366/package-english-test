@@ -2,6 +2,7 @@
 import { ITopic } from '../models';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useExerciseRunner } from './ExerciseRunnerContext';
 
 interface ExerciseSidebarProps {
   siblingTopics: ITopic[];
@@ -13,6 +14,7 @@ interface ExerciseSidebarProps {
  * Allows quick navigation between exercises of the same parent topic
  */
 export default function ExerciseSidebar({ siblingTopics, currentTopicId }: ExerciseSidebarProps) {
+  const { renderAds } = useExerciseRunner();
   const [isOpen, setIsOpen] = useState(false);
 
   if (!siblingTopics || siblingTopics.length === 0) {
@@ -170,6 +172,7 @@ export default function ExerciseSidebar({ siblingTopics, currentTopicId }: Exerc
             })}
           </ul>
         </nav>
+        {renderAds({ height: 90, style: { marginTop: '12px' } })}
       </aside>
     </>
   );

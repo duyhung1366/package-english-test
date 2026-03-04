@@ -5,6 +5,7 @@ import Quiz from './Quiz';
 import Spelling from './Spelling';
 import ParaGame from './ParaGame';
 import { Answer, ShowType } from './ExerciseRunner';
+import { useExerciseRunner } from './ExerciseRunnerContext';
 
 interface GameRendererProps {
   card: ICard;
@@ -36,6 +37,7 @@ export default function GameRenderer({
   showType = "one-by-one",
   isLastCard = false
 }: GameRendererProps) {
+  const { renderAds } = useExerciseRunner();
 
   // Recursive render function for nested cards (used in ParaGame)
   const renderChildCard = (childCard: ICard, subQuestionNumber?: number) => {
@@ -59,34 +61,40 @@ export default function GameRenderer({
     const cardAnswer = answers?.[card._id!];
 
     return (
-      <Quiz
-        card={card}
-        answer={cardAnswer}
-        onAnswer={(answer) => onAnswer(card._id!, answer)}
-        onNext={onNext}
-        submitType={submitType}
-        showNext={showType === "one-by-one" && !isChildOfPara}
-        isReviewMode={isReviewMode}
-        questionNumber={questionNumber}
-      />
+      <>
+        <Quiz
+          card={card}
+          answer={cardAnswer}
+          onAnswer={(answer) => onAnswer(card._id!, answer)}
+          onNext={onNext}
+          submitType={submitType}
+          showNext={showType === "one-by-one" && !isChildOfPara}
+          isReviewMode={isReviewMode}
+          questionNumber={questionNumber}
+        />
+        {renderAds({ height: 90, style: { marginTop: '12px' } })}
+      </>
     );
   }
-  
+
   if (card.cardGame === CardGame.SPELLING) {
     return (
-      <Spelling
-        card={card}
-        answers={answers}
-        onAnswer={onAnswer}
-        onNext={onNext}
-        submitType={submitType}
-        showNext={!isChildOfPara && showType === "one-by-one"}
-        isReviewMode={isReviewMode}
-        questionNumber={questionNumber}
-      />
+      <>
+        <Spelling
+          card={card}
+          answers={answers}
+          onAnswer={onAnswer}
+          onNext={onNext}
+          submitType={submitType}
+          showNext={!isChildOfPara && showType === "one-by-one"}
+          isReviewMode={isReviewMode}
+          questionNumber={questionNumber}
+        />
+        {renderAds({ height: 90, style: { marginTop: '12px' } })}
+      </>
     );
   }
-  
+
   if (card.cardGame === CardGame.PARA) {
     /**
      * Game paragraph, includes:

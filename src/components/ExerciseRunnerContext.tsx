@@ -1,7 +1,7 @@
 'use client';
 import { createContext, useContext } from 'react';
 
-export type RenderAdsFn = (adSlot: string, width: number, height: number) => React.ReactNode;
+export type RenderAdsFn = (args: { adSlot?: string, width?: number, height?: number; style?: React.CSSProperties }) => React.ReactNode;
 
 interface ExerciseRunnerContextValue {
   /** Render an ad unit by slot ID and dimensions */
