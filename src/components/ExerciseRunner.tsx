@@ -1,6 +1,6 @@
 'use client';
 import { exerciseUtils } from '../lib/utils';
-import { CardGame, ICard, ISeo, ITopic, SubmitType } from '../models';
+import { CardGame, ICard, SubmitType } from '../models';
 // import Link from 'next/link';
 import { useCallback, useState } from 'react';
 import GameRenderer from './GameRenderer';
@@ -9,14 +9,25 @@ import _ from 'lodash';
 import ExerciseSidebar from './ExerciseSidebar';
 
 export type ShowType = 'all' | 'one-by-one';
+
 interface ExerciseRunnerProps {
-  topic: ITopic;
-  exercise: ITopic;
+  /** URL slug of the parent topic, used for navigation links */
+  topicSlug: string;
+  /** Display name of the parent topic */
+  topicName: string;
+  /** Display name of this exercise */
+  exerciseName: string;
+  /** List of question cards to display */
   cards: ICard[];
-  seo: ISeo | null;
-  siblingTopics?: ITopic[];
+  /** Page heading (SEO h1) — falls back to exerciseName if not provided */
+  title?: string;
+  /** Page subheading (SEO description) — falls back to topicName if not provided */
+  description?: string;
+  /** How answers are submitted — defaults to CHECK_ON_ANSWER */
+  submitType?: SubmitType;
+  /** Display mode: show all questions at once or one at a time */
   showType?: ShowType;
-  // Optional config
+  /** Whether to show the detailed review screen after completing the exercise */
   shouldShowReviewResults?: boolean;
   // Optional sidebar element
   sidebarElement?: React.ReactNode;
@@ -29,14 +40,17 @@ export type Answer = {
 };
 
 export default function ExerciseRunner({
-  topic,
-  exercise,
+  topicSlug,
+  topicName,
+  exerciseName,
   cards,
-  seo,
-  siblingTopics,
+  title,
+  description,
+  submitType = SubmitType.CHECK_ON_ANSWER,
   showType = 'one-by-one',
   shouldShowReviewResults: shouldShowReviewResultsProp = true,
-  sidebarElement = <ExerciseSidebar siblingTopics={siblingTopics || []} currentTopicId={exercise._id} />
+  // sidebarElement = <ExerciseSidebar siblingTopics={siblingTopics || []} currentTopicId={exercise._id} />
+  sidebarElement
 }: ExerciseRunnerProps) {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [shuffledCards, setShuffledCards] = useState<ICard[]>(cards);
@@ -62,7 +76,7 @@ export default function ExerciseRunner({
       calculateScore();
       setShowResults(true);
     }
-    // scroll to top 
+    // scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -107,17 +121,6 @@ export default function ExerciseRunner({
     setScore(0);
   };
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="min-h-screen flex items-center justify-center">
-  //       <div className="text-center">
-  //         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-  //         <p className="text-gray-600">Loading exercise...</p>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
   if (cards.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -132,10 +135,10 @@ export default function ExerciseRunner({
             This exercise doesn't have any questions yet. Please check back later.
           </p>
           <a
-            href={`/${topic.slug}`}
+            href={`/${topicSlug}`}
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
           >
-            Back to {topic.name}
+            Back to {topicName}
           </a>
         </div>
       </div>
@@ -150,10 +153,10 @@ export default function ExerciseRunner({
           cards={shuffledCards}
           answers={answers}
           onTryAgain={handleTryAgain}
-          onBackToTopic={() => window.location.href = `/${topic.slug}`}
+          onBackToTopic={() => window.location.href = `/${topicSlug}`}
           score={score}
-          topicName={topic.name}
-          exerciseName={exercise.name}
+          topicName={topicName}
+          exerciseName={exerciseName}
         />
       );
     }
@@ -173,7 +176,7 @@ export default function ExerciseRunner({
               {score >= 80 ? 'Excellent!' : score >= 60 ? 'Good Job!' : 'Keep Practicing!'}
             </h2>
             <p className="text-gray-600">
-              You scored {score}% on {exercise.name}
+              You scored {score}% on {exerciseName}
             </p>
           </div>
 
@@ -185,10 +188,10 @@ export default function ExerciseRunner({
               Try Again
             </button>
             <a
-              href={`/${topic.slug}`}
+              href={`/${topicSlug}`}
               className="block w-full border-2 border-gray-300 text-gray-700 hover:bg-gray-50 py-3 rounded-lg font-semibold transition-colors"
             >
-              Back to {topic.name}
+              Back to {topicName}
             </a>
           </div>
         </div>
@@ -210,8 +213,8 @@ export default function ExerciseRunner({
               <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h1 className="text-xl font-bold text-gray-900">{seo?.titleH1 || exercise.name}</h1>
-                    <p className="text-sm text-gray-600">{seo?.description || topic.name}</p>
+                    <h1 className="text-xl font-bold text-gray-900">{title || exerciseName}</h1>
+                    <p className="text-sm text-gray-600">{description || topicName}</p>
                   </div>
                   <div className="text-sm text-gray-600">
                     Total: {shuffledCards.length} questions
@@ -240,7 +243,7 @@ export default function ExerciseRunner({
                     // answers={answers}
                     onAnswer={handleAnswer}
                     onNext={handleNext}
-                    submitType={exercise.submitType || SubmitType.CHECK_ON_ANSWER}
+                    submitType={submitType}
                     showType={showType}
                     isLastCard={currentCardIndex >= shuffledCards.length - 1}
                   />
@@ -279,8 +282,8 @@ export default function ExerciseRunner({
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <h1 className="text-xl font-bold text-gray-900">{seo?.titleH1 || exercise.name}</h1>
-                  <p className="text-sm text-gray-600">{seo?.description || topic.name}</p>
+                  <h1 className="text-xl font-bold text-gray-900">{title || exerciseName}</h1>
+                  <p className="text-sm text-gray-600">{description || topicName}</p>
                 </div>
                 <div className="text-sm text-gray-600">
                   Question {currentCardIndex + 1} of {shuffledCards.length}
@@ -317,7 +320,7 @@ export default function ExerciseRunner({
                     // answers={answers}
                     onAnswer={handleAnswer}
                     onNext={handleNext}
-                    submitType={exercise.submitType || SubmitType.CHECK_ON_ANSWER}
+                    submitType={submitType}
                     showType={showType}
                     isLastCard={currentCardIndex >= shuffledCards.length - 1}
                   />
