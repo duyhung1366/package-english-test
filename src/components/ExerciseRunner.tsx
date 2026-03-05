@@ -53,7 +53,7 @@ export default function ExerciseRunner({
   shouldShowReviewResults: shouldShowReviewResultsProp = true,
   // sidebarElement = <ExerciseSidebar siblingTopics={siblingTopics || []} currentTopicId={exercise._id} />
   sidebarElement,
-  renderAds,
+  renderAds = () => <></>,
 }: ExerciseRunnerProps) {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [shuffledCards, setShuffledCards] = useState<ICard[]>(cards);

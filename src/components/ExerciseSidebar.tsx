@@ -62,7 +62,7 @@ export default function ExerciseSidebar({ siblingTopics, currentTopicId }: Exerc
         <div
           className="lg:hidden fixed inset-0 bg-black"
           onClick={toggleSidebar}
-          style={{ 
+          style={{
             opacity: 0.5,
           }}
         />
@@ -174,8 +174,8 @@ export default function ExerciseSidebar({ siblingTopics, currentTopicId }: Exerc
               );
             })}
           </ul>
+          {renderAds({ height: 90, style: { marginTop: '12px' } })} 
         </nav>
-        {renderAds({ height: 90, style: { marginTop: '12px' } })}
       </aside>
     </>
   );
