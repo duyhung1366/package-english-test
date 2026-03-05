@@ -227,8 +227,8 @@ export default function Spelling({ card, answers, onAnswer, onNext, submitType, 
 
   const childCards = useMemo(() => {
     return card.childCards?.sort((a, b) => {
-      const numA = Number(extractTextFromHTML(a.question?.text)) ?? 0;
-      const numB = Number(extractTextFromHTML(b.question?.text)) ?? 0;
+      const numA = Number(extractTextFromHTML(a.question?.text).trim().replace(/[^\d]/g, '')) || 0;
+      const numB = Number(extractTextFromHTML(b.question?.text).trim().replace(/[^\d]/g, '')) || 0;
       return numA - numB
     })
   }, [card.childCards])
