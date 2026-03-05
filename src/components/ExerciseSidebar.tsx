@@ -60,15 +60,18 @@ export default function ExerciseSidebar({ siblingTopics, currentTopicId }: Exerc
       {/* Overlay for mobile */}
       {isOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+          className="lg:hidden fixed inset-0 bg-black"
           onClick={toggleSidebar}
+          style={{ 
+            opacity: 0.5,
+          }}
         />
       )}
 
       {/* Sidebar */}
       <aside
         className={`
-          fixed lg:sticky top-0 right-0 h-screen lg:h-auto
+          fixed lg:sticky top-0 right-0 h-screen lg:h-auto pt-16 lg:pt-0
           w-80 lg:w-72 xl:w-80
           bg-white border-l border-gray-200 shadow-xl lg:shadow-none
           overflow-y-auto
