@@ -2,13 +2,34 @@
 import { exerciseUtils } from '../lib/utils';
 import { CardGame, ICard, SubmitType } from '../models';
 // import Link from 'next/link';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import GameRenderer from './GameRenderer';
 import ReviewResults from './ReviewResults';
 import _ from 'lodash';
 import { ExerciseRunnerContext, RenderAdsFn } from './ExerciseRunnerContext';
 
 export type ShowType = 'all' | 'one-by-one';
+
+export type GameStatus = 'inprogress' | 'completed' | 'new';
+
+export type StudyProgressItem = {
+  cardId: string;
+  game: CardGame;
+  isCorrect: boolean;
+  selectedChoice: number;
+  answer: string;
+};
+
+type StudyData = {
+  mapCardCorrections: {
+    [cardId: string]: {
+      game: CardGame;
+      isCorrect: boolean;
+      selectedChoice: number;
+      answer: string;
+    };
+  };
+};
 
 interface ExerciseRunnerProps {
   /** URL slug of the parent topic, used for navigation links */
@@ -33,6 +54,16 @@ interface ExerciseRunnerProps {
   sidebarElement?: React.ReactNode;
   /** Callback to render an ad unit — receives adSlot ID and display dimensions */
   renderAds?: RenderAdsFn;
+  /** Previously recorded answers for each card (used in inprogress / completed flows) */
+  studyData?: StudyData;
+  /** Current progress status of the exercise session */
+  gameStatus?: GameStatus;
+  /** Called after each answer when submitType === CHECK_ON_ANSWER */
+  onUpdateStudyProgress?: (data: StudyProgressItem) => Promise<void>;
+  /** Called with all answers when reaching results (submitType === CHECK_ON_SUBMIT) */
+  onUpdateStudyProgressAll?: (data: StudyProgressItem[]) => Promise<void>;
+  /** Called to persist the session status */
+  onUpdateProgressStatus?: (status: GameStatus) => Promise<void>;
 }
 
 export type Answer = {
@@ -40,6 +71,49 @@ export type Answer = {
   answerText?: string;
   isCorrect: boolean;
 };
+
+// ---------------------------------------------------------------------------
+// Helpers (outside component to avoid re-creation)
+// ---------------------------------------------------------------------------
+
+function buildAnswersFromStudyData(studyData?: StudyData): Record<string, Answer | undefined> {
+  if (!studyData) return {};
+  const result: Record<string, Answer | undefined> = {};
+  for (const [cardId, correction] of Object.entries(studyData.mapCardCorrections)) {
+    result[cardId] = {
+      choiceId: correction.game === CardGame.QUIZ ? correction.selectedChoice : undefined,
+      answerText: correction.game === CardGame.SPELLING ? correction.answer : undefined,
+      isCorrect: correction.isCorrect,
+    };
+  }
+  return result;
+}
+
+function findCardById(cards: ICard[], id: string): ICard | undefined {
+  for (const card of cards) {
+    if (card._id === id) return card;
+    if (card.childCards?.length) {
+      const found = findCardById(card.childCards, id);
+      if (found) return found;
+    }
+  }
+  return undefined;
+}
+
+function isCardFullyAnswered(card: ICard, answers: Record<string, Answer | undefined>): boolean {
+  if (card.cardGame === CardGame.QUIZ) {
+    return !!answers[card._id!];
+  }
+  if (card.cardGame === CardGame.SPELLING) {
+    return (card.childCards || []).every(c => !!answers[c._id!]);
+  }
+  if (card.cardGame === CardGame.PARA) {
+    return (card.childCards || []).every(c => isCardFullyAnswered(c, answers));
+  }
+  return false;
+}
+
+// ---------------------------------------------------------------------------
 
 export default function ExerciseRunner({
   topicSlug,
@@ -54,34 +128,54 @@ export default function ExerciseRunner({
   // sidebarElement = <ExerciseSidebar siblingTopics={siblingTopics || []} currentTopicId={exercise._id} />
   sidebarElement,
   renderAds = () => <></>,
+  studyData,
+  gameStatus,
+  onUpdateStudyProgress,
+  onUpdateStudyProgressAll,
+  onUpdateProgressStatus,
 }: ExerciseRunnerProps) {
-  const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [shuffledCards, setShuffledCards] = useState<ICard[]>(cards);
-  const [answers, setAnswers] = useState<Record<string, { choiceId?: number, answerText?: string, isCorrect: boolean } | undefined>>({});
-  const [showResults, setShowResults] = useState(false);
+
+  const [answers, setAnswers] = useState<Record<string, Answer | undefined>>(() => {
+    if (gameStatus === 'inprogress' || gameStatus === 'completed') {
+      return buildAnswersFromStudyData(studyData);
+    }
+    return {};
+  });
+
+  const [currentCardIndex, setCurrentCardIndex] = useState(() => {
+    if (gameStatus === 'inprogress' && showType === 'one-by-one') {
+      const initialAnswers = buildAnswersFromStudyData(studyData);
+      const idx = cards.findIndex(card => !isCardFullyAnswered(card, initialAnswers));
+      return idx === -1 ? 0 : idx;
+    }
+    return 0;
+  });
+
+  const [showResults, setShowResults] = useState(gameStatus === 'completed');
   const [score, setScore] = useState(0);
 
-  // const totalQuestions = exerciseUtils.getTotalQuestionCount(shuffledCards);
+  // ---------------------------------------------------------------------------
+  // Side-effects on mount
+  // ---------------------------------------------------------------------------
 
-  const handleAnswer = useCallback((cardId: string, answer: Answer) => {
-    setAnswers(prev => ({
-      ...prev,
-      [cardId]: answer
-    }));
+  useEffect(() => {
+    // Notify host that session is now in progress (only for brand-new sessions)
+    if (gameStatus === 'new') {
+      onUpdateProgressStatus?.('inprogress');
+    }
+
+    // For completed sessions, restore the score from studyData
+    if (gameStatus === 'completed') {
+      // calculateScore reads from the already-initialised `answers` closure
+      calculateScore();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleNext = () => {
-    if (showType === 'all') return
-    if (currentCardIndex < shuffledCards.length - 1) {
-      setCurrentCardIndex(prev => prev + 1);
-    } else {
-      // Calculate score and show results
-      calculateScore();
-      setShowResults(true);
-    }
-    // scroll to top
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  // ---------------------------------------------------------------------------
+  // Score helpers
+  // ---------------------------------------------------------------------------
 
   const getTotalAnswers = (cards: ICard[]): number => {
     return cards.reduce((total, card) => {
@@ -94,7 +188,7 @@ export default function ExerciseRunner({
       }
       return total;
     }, 0);
-  }
+  };
 
   const calculateScore = () => {
     let correctAnswers = Object.values(answers).reduce((total, answer) => {
@@ -108,9 +202,80 @@ export default function ExerciseRunner({
     setScore(Math.round((correctAnswers / (totalAnswers || 1)) * 100));
   };
 
+  // ---------------------------------------------------------------------------
+  // Build the progress payload from current answers
+  // ---------------------------------------------------------------------------
+
+  const buildProgressPayload = (currentAnswers: Record<string, Answer | undefined>): StudyProgressItem[] => {
+    return Object.entries(currentAnswers).flatMap(([cardId, answer]) => {
+      if (!answer) return [];
+      const card = findCardById(shuffledCards, cardId);
+      return [{
+        cardId,
+        game: card?.cardGame ?? CardGame.QUIZ,
+        isCorrect: answer.isCorrect,
+        selectedChoice: answer.choiceId ?? 0,
+        answer: answer.answerText ?? '',
+      }];
+    });
+  };
+
+  // ---------------------------------------------------------------------------
+  // Handlers
+  // ---------------------------------------------------------------------------
+
+  const handleAnswer = useCallback((cardId: string, answer: Answer) => {
+    setAnswers(prev => {
+      const next = { ...prev, [cardId]: answer };
+
+      if (submitType === SubmitType.CHECK_ON_ANSWER && onUpdateStudyProgress) {
+        const card = findCardById(cards, cardId);
+        if (card) {
+          onUpdateStudyProgress({
+            cardId,
+            game: card.cardGame,
+            isCorrect: answer.isCorrect,
+            selectedChoice: answer.choiceId ?? 0,
+            answer: answer.answerText ?? '',
+          });
+        }
+      }
+
+      return next;
+    });
+  }, [submitType, onUpdateStudyProgress, cards]);
+
+  const handleNext = () => {
+    if (showType === 'all') return;
+    if (currentCardIndex < shuffledCards.length - 1) {
+      setCurrentCardIndex(prev => prev + 1);
+    } else {
+      // Calculate score and show results
+      if (submitType === SubmitType.CHECK_ON_SUBMIT && onUpdateStudyProgressAll) {
+        // answers state is captured in closure at this point
+        setAnswers(prev => {
+          onUpdateStudyProgressAll(buildProgressPayload(prev));
+          return prev;
+        });
+      }
+      calculateScore();
+      setShowResults(true);
+      onUpdateProgressStatus?.('completed');
+    }
+    // scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleShowResults = () => {
+    if (submitType === SubmitType.CHECK_ON_SUBMIT && onUpdateStudyProgressAll) {
+      setAnswers(prev => {
+        onUpdateStudyProgressAll(buildProgressPayload(prev));
+        return prev;
+      });
+    }
     calculateScore();
     setShowResults(true);
+    onUpdateProgressStatus?.('completed');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -125,6 +290,8 @@ export default function ExerciseRunner({
   };
 
   const progress = ((currentCardIndex + 1) / shuffledCards.length) * 100;
+
+  const isInProgressMode = gameStatus === 'inprogress';
 
   const content = (() => {
     if (cards.length === 0) {
@@ -236,15 +403,15 @@ export default function ExerciseRunner({
                         Question {index + 1}
                       </span>
                     </div>
-                    {/* {renderGame(card)} */}
                     <GameRenderer
                       card={card}
-                      // answers={answers}
+                      answers={answers}
                       onAnswer={handleAnswer}
                       onNext={handleNext}
                       submitType={submitType}
                       showType={showType}
                       isLastCard={currentCardIndex >= shuffledCards.length - 1}
+                      isInProgressMode={isInProgressMode}
                     />
                   </div>
                 ))}
@@ -304,12 +471,13 @@ export default function ExerciseRunner({
                   >
                     <GameRenderer
                       card={card}
-                      // answers={answers}
+                      answers={answers}
                       onAnswer={handleAnswer}
                       onNext={handleNext}
                       submitType={submitType}
                       showType={showType}
                       isLastCard={currentCardIndex >= shuffledCards.length - 1}
+                      isInProgressMode={isInProgressMode}
                     />
                   </div>
                 );

@@ -14,6 +14,8 @@ interface SpellingProps {
   isReviewMode?: boolean; // Review mode - show all answers, disable interaction
   questionNumber?: number; // Question number for review mode
   showNext?: boolean;
+  /** When true, pre-fills inputs from answers for CHECK_ON_SUBMIT inprogress sessions */
+  isInProgressMode?: boolean;
 }
 
 function extractTextFromHTML(html: string): string {
@@ -185,7 +187,7 @@ const QuestionContainer = memo(({
 
 QuestionContainer.displayName = 'QuestionContainer';
 
-export default function Spelling({ card, answers, onAnswer, onNext, submitType, isReviewMode = false, questionNumber, showNext }: SpellingProps) {
+export default function Spelling({ card, answers, onAnswer, onNext, submitType, isReviewMode = false, questionNumber, showNext, isInProgressMode = false }: SpellingProps) {
   const [showFeedback, setShowFeedback] = useState(isReviewMode); // Auto-show feedback in review mode
   const inputValuesRef = useRef<Record<string, { value: string, isCorrect: boolean }>>({});
   // const [inputValuesForFeedback, setInputValuesForFeedback] = useState<Record<string, { value: string, isCorrect: boolean }>>({});
@@ -235,7 +237,11 @@ export default function Spelling({ card, answers, onAnswer, onNext, submitType, 
 
   // Reset state when card changes
   useEffect(() => {
-    const initialValues = isReviewMode
+    const hasPreAnswers = childCards?.some(c => !!answers[c._id!]) ?? false;
+    // Pre-fill inputs for review mode OR inprogress sessions with existing answers
+    const shouldPreFill = isReviewMode || (isInProgressMode && hasPreAnswers);
+
+    const initialValues = shouldPreFill
       ? childCards?.reduce((acc, card, index) => {
         const data = answers[card._id!] ?? {} as Answer;
         acc[`${index + 1}`] = {
@@ -247,10 +253,10 @@ export default function Spelling({ card, answers, onAnswer, onNext, submitType, 
       : {};
 
     inputValuesRef.current = initialValues;
-    setShowFeedback(isReviewMode); // Keep feedback shown in review mode
+    setShowFeedback(isReviewMode); // Keep feedback shown in review mode (not for inprogress)
 
-    // Check if all inputs are filled initially (for review mode)
-    if (isReviewMode) {
+    // Check if all inputs are filled initially (for review / inprogress modes)
+    if (shouldPreFill) {
       const totalInputs = childCards?.length || 0;
       const filledInputs = Object.keys(initialValues).filter(
         key => initialValues[key]?.value?.trim() !== ''
@@ -259,7 +265,7 @@ export default function Spelling({ card, answers, onAnswer, onNext, submitType, 
     } else {
       setHasAllInputsFilled(false);
     }
-  }, [card._id, isReviewMode, childCards, answers]);
+  }, [card._id, isReviewMode, isInProgressMode, childCards, answers]);
 
   const handleInputChange = useCallback((inputIndex: number, value: string, inputElement: HTMLInputElement) => {
     if (isReviewMode) return; // Disable interaction in review mode
