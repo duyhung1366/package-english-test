@@ -10,6 +10,8 @@ import { useExerciseRunner } from './ExerciseRunnerContext';
 interface GameRendererProps {
   card: ICard;
   answers?: Record<string, Answer | undefined>;
+  /** Snapshot of answers from studyData at mount time — used to detect pre-answered cards */
+  preAnswers?: Record<string, Answer | undefined>;
   onAnswer: (cardId: string, answer: Answer) => void;
   onNext: () => void;
   submitType: SubmitType;
@@ -30,6 +32,7 @@ interface GameRendererProps {
 export default function GameRenderer({
   card,
   answers,
+  preAnswers,
   onAnswer,
   onNext,
   submitType,
@@ -48,6 +51,7 @@ export default function GameRenderer({
       <GameRenderer
         card={childCard}
         answers={answers}
+        preAnswers={preAnswers}
         onAnswer={onAnswer}
         onNext={onNext}
         submitType={submitType}
@@ -62,12 +66,14 @@ export default function GameRenderer({
   };
 
   if (card.cardGame === CardGame.QUIZ) {
+    // Use preAnswers (studyData snapshot) — not live answers — so that cards the user
+    // answers during this session don't immediately flip into review mode, which would
+    // hide the Next button.
     const cardAnswer = answers?.[card._id!];
-    // In inprogress mode with CHECK_ON_ANSWER, treat pre-answered cards as review mode
-    // so previous correct/incorrect state is shown immediately.
+    const preCardAnswer = preAnswers?.[card._id!];
     const effectiveReviewMode =
       isReviewMode ||
-      (isInProgressMode && submitType === SubmitType.CHECK_ON_ANSWER && !!cardAnswer);
+      (isInProgressMode && submitType === SubmitType.CHECK_ON_ANSWER && !!preCardAnswer);
 
     return (
       <>
@@ -87,11 +93,11 @@ export default function GameRenderer({
   }
 
   if (card.cardGame === CardGame.SPELLING) {
-    // Show pre-answers for inprogress mode (feedback only for CHECK_ON_ANSWER)
-    const hasChildAnswers = card.childCards?.some(c => !!answers?.[c._id!]) ?? false;
+    // Use preAnswers so that child cards answered live don't flip into review mode.
+    const hasPreChildAnswers = card.childCards?.some(c => !!preAnswers?.[c._id!]) ?? false;
     const effectiveReviewMode =
       isReviewMode ||
-      (isInProgressMode && submitType === SubmitType.CHECK_ON_ANSWER && hasChildAnswers);
+      (isInProgressMode && submitType === SubmitType.CHECK_ON_ANSWER && hasPreChildAnswers);
 
     return (
       <>

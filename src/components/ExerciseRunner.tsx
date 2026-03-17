@@ -136,6 +136,17 @@ export default function ExerciseRunner({
 }: ExerciseRunnerProps) {
   const [shuffledCards, setShuffledCards] = useState<ICard[]>(cards);
 
+  // Pre-answers are built once from studyData and never change during the session.
+  // They are used to distinguish "already answered before this session" cards from
+  // cards the user answers live, so that effectiveReviewMode is not triggered on
+  // newly-answered cards.
+  const [preAnswers] = useState<Record<string, Answer | undefined>>(() => {
+    if (gameStatus === 'inprogress' || gameStatus === 'completed') {
+      return buildAnswersFromStudyData(studyData);
+    }
+    return {};
+  });
+
   const [answers, setAnswers] = useState<Record<string, Answer | undefined>>(() => {
     if (gameStatus === 'inprogress' || gameStatus === 'completed') {
       return buildAnswersFromStudyData(studyData);
@@ -406,6 +417,7 @@ export default function ExerciseRunner({
                     <GameRenderer
                       card={card}
                       answers={answers}
+                      preAnswers={preAnswers}
                       onAnswer={handleAnswer}
                       onNext={handleNext}
                       submitType={submitType}
@@ -472,6 +484,7 @@ export default function ExerciseRunner({
                     <GameRenderer
                       card={card}
                       answers={answers}
+                      preAnswers={preAnswers}
                       onAnswer={handleAnswer}
                       onNext={handleNext}
                       submitType={submitType}
