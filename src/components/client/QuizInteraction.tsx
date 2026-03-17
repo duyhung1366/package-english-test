@@ -18,6 +18,7 @@ interface QuizInteractionProps {
     handleChoiceSelect: (choiceId: number) => void;
     handleCheck: () => void;
   }) => React.ReactNode;
+  hideActionButton?: boolean; // Hide action buttons (used in review mode)
 }
 
 /**
@@ -32,7 +33,8 @@ export default function QuizInteraction({
   submitType,
   showNext,
   isReviewMode = false,
-  children
+  children,
+  hideActionButton = false
 }: QuizInteractionProps) {
   const [showFeedback, setShowFeedback] = useState(isReviewMode); // Auto-show feedback in review mode
   const [selectedAnswer, setSelectedAnswer] = useState<number | undefined>(answer?.choiceId);
@@ -74,7 +76,7 @@ export default function QuizInteraction({
       })}
 
       {/* Action Buttons - Hidden in review mode */}
-      {!isReviewMode && (
+      {!hideActionButton && (
         <div className="flex justify-end">
           {/* Check Answer Button (if needed) */}
           {/* {submitType === SubmitType.CHECK_ON_SUBMIT && selectedAnswer !== undefined && !showFeedback && (

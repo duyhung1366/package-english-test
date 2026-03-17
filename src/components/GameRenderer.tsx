@@ -86,6 +86,7 @@ export default function GameRenderer({
           showNext={showType === "one-by-one" && !isChildOfPara}
           isReviewMode={effectiveReviewMode}
           questionNumber={questionNumber}
+          hideActionButton={!!isReviewMode}
         />
         {renderAds({ height: 90, style: { marginTop: '12px' } })}
       </>

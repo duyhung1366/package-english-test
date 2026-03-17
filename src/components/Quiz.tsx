@@ -12,6 +12,8 @@ interface QuizProps {
   showNext?: boolean;
   isReviewMode?: boolean; // Review mode - show all answers, disable interaction
   questionNumber?: number; // Question number for review mode
+  /** Hide action button */
+  hideActionButton?: boolean;
 }
 
 /**
@@ -19,7 +21,7 @@ interface QuizProps {
  * Combines server-rendered content (QuizContent) with client-side interactions (QuizInteraction)
  * This ensures SEO-friendly content while maintaining rich interactivity
  */
-export default function Quiz({ card, answer, onAnswer, onNext, submitType, showNext, isReviewMode = false, questionNumber }: QuizProps) {
+export default function Quiz({ card, answer, onAnswer, onNext, submitType, showNext, isReviewMode = false, questionNumber, hideActionButton }: QuizProps) {
   return (
     <QuizInteraction
       card={card}
@@ -29,6 +31,7 @@ export default function Quiz({ card, answer, onAnswer, onNext, submitType, showN
       submitType={submitType}
       showNext={showNext}
       isReviewMode={isReviewMode}
+      hideActionButton={hideActionButton}
     >
       {({ selectedAnswer, showFeedback, handleChoiceSelect }) => (
         <QuizContent
