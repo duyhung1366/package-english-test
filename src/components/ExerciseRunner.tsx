@@ -64,6 +64,8 @@ interface ExerciseRunnerProps {
   onUpdateStudyProgressAll?: (data: StudyProgressItem[]) => Promise<void>;
   /** Called to persist the session status */
   onUpdateProgressStatus?: (status: GameStatus) => Promise<void>;
+  /** Called when the user clicks "Try Again" on the results screen */
+  onTryAgain?: () => void;
 }
 
 export type Answer = {
@@ -133,6 +135,7 @@ export default function ExerciseRunner({
   onUpdateStudyProgress,
   onUpdateStudyProgressAll,
   onUpdateProgressStatus,
+  onTryAgain,
 }: ExerciseRunnerProps) {
   const [shuffledCards, setShuffledCards] = useState<ICard[]>(cards);
 
@@ -291,6 +294,7 @@ export default function ExerciseRunner({
   };
 
   const handleTryAgain = () => {
+    onTryAgain?.();
     // Shuffle cards again
     const shuffled = exerciseUtils.shuffleParentCards(cards);
     setShuffledCards(shuffled);
