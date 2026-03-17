@@ -267,7 +267,7 @@ export default function Spelling({ card, answers, onAnswer, onNext, submitType, 
     } else {
       setHasAllInputsFilled(false);
     }
-  }, [card._id, isReviewMode, isInProgressMode, childCards, answers]);
+  }, [card._id, isReviewMode, isInProgressMode, childCards]);
 
   const handleInputChange = useCallback((inputIndex: number, value: string, inputElement: HTMLInputElement) => {
     if (isReviewMode) return; // Disable interaction in review mode
