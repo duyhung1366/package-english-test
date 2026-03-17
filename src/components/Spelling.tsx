@@ -16,6 +16,8 @@ interface SpellingProps {
   showNext?: boolean;
   /** When true, pre-fills inputs from answers for CHECK_ON_SUBMIT inprogress sessions */
   isInProgressMode?: boolean;
+  /** Hide action button */
+  hideActionButton?: boolean;
 }
 
 function extractTextFromHTML(html: string): string {
@@ -187,7 +189,7 @@ const QuestionContainer = memo(({
 
 QuestionContainer.displayName = 'QuestionContainer';
 
-export default function Spelling({ card, answers, onAnswer, onNext, submitType, isReviewMode = false, questionNumber, showNext, isInProgressMode = false }: SpellingProps) {
+export default function Spelling({ card, answers, onAnswer, onNext, submitType, isReviewMode = false, questionNumber, showNext, isInProgressMode = false, hideActionButton }: SpellingProps) {
   const [showFeedback, setShowFeedback] = useState(isReviewMode); // Auto-show feedback in review mode
   const inputValuesRef = useRef<Record<string, { value: string, isCorrect: boolean }>>({});
   // const [inputValuesForFeedback, setInputValuesForFeedback] = useState<Record<string, { value: string, isCorrect: boolean }>>({});
@@ -390,7 +392,7 @@ export default function Spelling({ card, answers, onAnswer, onNext, submitType, 
       )}
 
       {/* Action Buttons - Hidden in review mode */}
-      {!isReviewMode && (
+      {!hideActionButton && (
         <div className="flex justify-between">
           <div>
             {submitType === SubmitType.CHECK_ON_ANSWER && !showFeedback && (

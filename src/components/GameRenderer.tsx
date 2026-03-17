@@ -111,6 +111,7 @@ export default function GameRenderer({
           isReviewMode={effectiveReviewMode}
           questionNumber={questionNumber}
           isInProgressMode={isInProgressMode}
+          hideActionButton={!!isReviewMode}
         />
         {renderAds({ height: 90, style: { marginTop: '12px' } })}
       </>
