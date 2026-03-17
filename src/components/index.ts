@@ -9,5 +9,5 @@ export { default as CircularScore } from './CircularScore';
 export { default as ExerciseSidebar } from './ExerciseSidebar';
 
 // Export types
-export type { Answer, ShowType } from './ExerciseRunner';
+export type { Answer, ShowType, GameStatus, StudyProgressItem } from './ExerciseRunner';
 
