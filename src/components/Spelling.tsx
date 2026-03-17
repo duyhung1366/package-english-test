@@ -1,14 +1,14 @@
 'use client';
 
 import { useState, useEffect, useMemo, useRef, memo, useCallback } from 'react';
-import { ICard, SubmitType } from '../models';
+import { CardGame, ICard, SubmitType } from '../models';
 import * as cheerio from 'cheerio';
 import { Answer } from './ExerciseRunner';
 
 interface SpellingProps {
   card: ICard;
   answers: Record<string, Answer | undefined>;
-  onAnswer: (cardId: string, answer: Answer) => void;
+  onAnswer: (cardId: string, answer: Answer, cardGame: CardGame) => void;
   onNext: () => void;
   submitType: SubmitType;
   isReviewMode?: boolean; // Review mode - show all answers, disable interaction
@@ -286,7 +286,7 @@ export default function Spelling({ card, answers, onAnswer, onNext, submitType, 
       onAnswer(childCard?._id!, {
         answerText: value,
         isCorrect
-      });
+      }, CardGame.SPELLING);
     }
 
     // Update ref (no re-render) - store as object with value and isCorrect

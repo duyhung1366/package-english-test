@@ -238,7 +238,7 @@ export default function ExerciseRunner({
   // Handlers
   // ---------------------------------------------------------------------------
 
-  const handleAnswer = useCallback((cardId: string, answer: Answer) => {
+  const handleAnswer = useCallback((cardId: string, answer: Answer, cardGame: CardGame) => {
     setAnswers(prev => {
       const next = { ...prev, [cardId]: answer };
 
@@ -247,7 +247,7 @@ export default function ExerciseRunner({
         if (card) {
           onUpdateStudyProgress({
             cardId,
-            game: card.cardGame,
+            game: cardGame,
             isCorrect: answer.isCorrect,
             selectedChoice: answer.choiceId ?? 0,
             answer: answer.answerText ?? '',

@@ -12,7 +12,7 @@ interface GameRendererProps {
   answers?: Record<string, Answer | undefined>;
   /** Snapshot of answers from studyData at mount time — used to detect pre-answered cards */
   preAnswers?: Record<string, Answer | undefined>;
-  onAnswer: (cardId: string, answer: Answer) => void;
+  onAnswer: (cardId: string, answer: Answer, cardGame: CardGame) => void;
   onNext: () => void;
   submitType: SubmitType;
   isChildOfPara?: boolean;
@@ -80,7 +80,7 @@ export default function GameRenderer({
         <Quiz
           card={card}
           answer={cardAnswer}
-          onAnswer={(answer) => onAnswer(card._id!, answer)}
+          onAnswer={(answer) => onAnswer(card._id!, answer, CardGame.QUIZ)}
           onNext={onNext}
           submitType={submitType}
           showNext={showType === "one-by-one" && !isChildOfPara}
