@@ -40,7 +40,7 @@ export default function QuizContent({
 
       {/* Question */}
       <div className="mb-8">
-        <h2
+        <p
           id="question-text"
           className="text-2xl font-bold text-gray-900 mb-4"
           dangerouslySetInnerHTML={{ __html: card.question.text }}
